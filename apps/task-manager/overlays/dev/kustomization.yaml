@@ -9,4 +9,4 @@ resources:
 images:
   - name: PLACEHOLDER_IMAGE
     newName: 991192677553.dkr.ecr.us-east-1.amazonaws.com/task-manager
-    newTag: "1.0.0"
+    newTag: "1.0.2"
