@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: controlador
+  labels:
+    app: controlador
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: controlador
+  template:
+    metadata:
+      labels:
+        app: controlador
+    spec:
+      serviceAccountName: controlador
+      containers:
+        - name: controlador
+          image: PLACEHOLDER_IMAGE
+          ports:
+            - containerPort: 8080
+          env:
+            - name: PORT
+              value: "8080"
+            - name: HOST
+              value: "0.0.0.0"
+            - name: OUTPUT_DIR
+              value: "/tmp/output"
+            - name: GITHUB_OWNER
+              value: "ai-idp"
+            - name: AWS_REGION
+              value: "us-east-1"
+            - name: GITOPS_REPO
+              value: "gitops-apps"
+          envFrom:
+            - secretRef:
+                name: controlador-secrets
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            initialDelaySeconds: 15
+            periodSeconds: 30
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 15
+          resources:
+            requests:
+              cpu: 256m
+              memory: 512Mi
+            limits:
+              cpu: 512m
+              memory: 1Gi
