@@ -12,7 +12,8 @@ metadata:
 spec:
   ingressClassName: alb
   rules:
-    - http:
+    - host: task-manager.softwareengineer.cloud
+      http:
         paths:
           - path: /
             pathType: Prefix
