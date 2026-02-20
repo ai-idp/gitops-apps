@@ -8,5 +8,13 @@ resources:
 
 images:
   - name: PLACEHOLDER_IMAGE
-    newName: 947810884862.dkr.ecr.us-east-1.amazonaws.com/task-manager
-    newTag: "1.0.0"
+    newName: PLACEHOLDER_IMAGE
+    newTag: "latest"
+patches:
+  - patch: |
+      - op: replace
+        path: /spec/rules/0/host
+        value: task-manager-dev.softwareengineer.cloud
+    target:
+      kind: Ingress
+      name: task-manager
