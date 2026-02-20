@@ -9,4 +9,12 @@ resources:
 images:
   - name: PLACEHOLDER_IMAGE
     newName: 947810884862.dkr.ecr.us-east-1.amazonaws.com/task-manager
-    newTag: "spec-add-task-query-d574407"
+    newTag: "spec-add-task-query-2ed8fb2"
+patches:
+  - patch: |
+      - op: replace
+        path: /spec/rules/0/host
+        value: task-manager-preview-spec-add-task-query.softwareengineer.cloud
+    target:
+      kind: Ingress
+      name: task-manager
